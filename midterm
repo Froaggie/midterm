@@ -1,0 +1,62 @@
+class kids:
+    def __init__(self, name, present, dress, phone, safety):
+        self.name = name
+        self.present = present
+        self.dress = dress
+        self.phone = phone
+        self.safety = safety
+
+    def assign_present(self, present):
+        self.present = present
+
+    def assign_dress(self, dress):
+        self.dress = dress
+    
+    def assign_phone(self, phone):
+        self.phone = phone
+
+    def assign_safety(self, safety):
+        self.safety = safety
+
+    def student_properties(self):
+        print("Student Data:")
+        print("Name:", self.name)
+        print("Days present in school:", self.present)
+        print("Days not in dress code:", self.dress)
+        print("Improper phone usage:", self.phone)
+        print("Days being unsafe:", self.safety)
+    
+
+James = kids('James', 'NA', 'NA', 'NA', 'NA')
+Adam = kids('Adam', 'NA', 'NA', 'NA', 'NA')
+Cole = kids('Cole', 'NA', 'NA', 'NA', 'NA')
+Brian = kids('Brian', 'NA', 'NA', 'NA', 'NA')
+David = kids('David', 'NA', 'NA', 'NA', 'NA')
+John = kids('John', 'NA', 'NA', 'NA', 'NA')
+Chandler = kids('Chandler', 'NA', 'NA', 'NA', 'NA')
+Pearson = kids('Pearson', 'NA', 'NA', 'NA', 'NA')
+Dwayne = kids('Dwayne', 'NA', 'NA', 'NA', 'NA')
+Gavin = kids('Gavin', 'NA', 'NA', 'NA', 'NA')
+Ryan = kids('Ryan', 'NA', 'NA', 'NA', 'NA')
+Shahood = kids('Shahood', 'NA', 'NA', 'NA', 'NA')
+Chris = kids('Chris', 'NA', 'NA', 'NA', 'NA')
+Aiden = kids('Aiden', 'NA', 'NA', 'NA', 'NA')
+Jaiden = kids('Jaiden', 'NA', 'NA', 'NA', 'NA')
+Leo = kids('Leo', 'NA', 'NA', 'NA', 'NA')
+Marcus = kids('Marcus', 'NA', 'NA', 'NA', 'NA')
+Muntag = kids('Muntag', 'NA', 'NA', 'NA', 'NA')
+Mason = kids('Mason', 'NA', 'NA', 'NA', 'NA')
+Nate = kids('Nate', 'NA', 'NA', 'NA', 'NA')
+
+thekids = ["James", "Adam", "Cole", "Brian", "David", "John", "Chandler", "Pearson", "Dwayne", "Gavin", "Ryan", "Shahood", "Chris", "Aiden", "Jaiden", "Leo", "Marcos", "Muntag", "Mason", "Nate"]
+engineering = [James, Adam, Cole, Brian, David, John, Chandler, Pearson, Dwayne, Gavin, Ryan, Shahood, Chris, Aiden, Jaiden, Leo, Marcus, Muntag, Mason, Nate]
+
+def mainmenu():
+    print("Hello there! What would you like to do today? \n 1. View a student \n 2. Edit a students data")
+    if(int(input()) == 1):
+        print("What is the name of the student you would like to view?")
+        kidname = str(input())
+        kidex = thekids.index(kidname)
+        display1 = engineering.pop(kidex)
+        display1.student_properties()
+    if(int(input()) == 2):
