@@ -1,24 +1,24 @@
 class kids:
-    def __init__(self, name, present=None, dress=None, phone=None, safety=None):
+    def __init__(self, name, present=None, dress=None, phone=None, safety=None): #Define the different topics
         self.name = name
         self.present = [] if present is None else present
         self.dress = [] if dress is None else dress
         self.phone = [] if phone is None else phone
         self.safety = [] if safety is None else safety
 
-    def assign_present(self, dates):
+    def assign_present(self, dates): #assign attendence
         self.present.extend(dates)
 
-    def assign_dress(self, dates):
+    def assign_dress(self, dates): #assign dress code
         self.dress.extend(dates)
     
-    def assign_phone(self, dates):
+    def assign_phone(self, dates): #assign phone usage
         self.phone.extend(dates)
 
-    def assign_safety(self, dates):
+    def assign_safety(self, dates): #assign safety
         self.safety.extend(dates)
 
-    def student_properties(self):
+    def student_properties(self): #what is displayed per student
         print("Student Data:")
         print("Name:", self.name)
         print("Days present in school:", self.present)
@@ -26,7 +26,7 @@ class kids:
         print("Improper phone usage:", self.phone)
         print("Days being unsafe:", self.safety)
 
-thekids = {
+thekids = { #list of the students
     'james': kids('James'),
     'adam': kids('Adam'),
     'cole': kids('Cole'),
@@ -38,9 +38,7 @@ thekids = {
     'dwayne': kids('Dwayne')
 }
 
-
-
-def displaystudents():
+def displaystudents(): #Displays the student
     name_stats = input("Hello there! Which students data would you like to view today?").lower()
     kids = thekids.get(name_stats)
     if kids:
@@ -49,7 +47,7 @@ def displaystudents():
         print("Sorry! That student is not in our database")
     mainmenu()
 
-def studenteditor():
+def studenteditor(): #allows you to edit the student
     edit_name = input("Which student would you like to edit?").lower()
     kid = thekids.get(edit_name)
     if kid:
@@ -79,7 +77,7 @@ def studenteditor():
         print("sorry, that student is not in our database!")
         mainmenu()
 
-def mainmenu():
+def mainmenu(): #mainmenu/intro page
     print("====== MAIN MENU ======")
     menu_choice = input("Hello there! What would you like to do today? \n 1. Display a student \n 2. Edit a students data")
     choices = {'1': displaystudents, '2': studenteditor}
