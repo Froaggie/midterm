@@ -1,22 +1,22 @@
 class kids:
-    def __init__(self, name, present, dress, phone, safety):
+    def __init__(self, name, present=None, dress=None, phone=None, safety=None):
         self.name = name
-        self.present = present
-        self.dress = dress
-        self.phone = phone
-        self.safety = safety
+        self.present = [] if present is None else present
+        self.dress = [] if dress is None else dress
+        self.phone = [] if phone is None else phone
+        self.safety = [] if safety is None else safety
 
-    def assign_present(self, present):
-        self.present = present
+    def assign_present(self, dates):
+        self.present.extend(dates)
 
-    def assign_dress(self, dress):
-        self.dress = dress
+    def assign_dress(self, dates):
+        self.dress.extend(dates)
     
-    def assign_phone(self, phone):
-        self.phone = phone
+    def assign_phone(self, dates):
+        self.phone.extend(dates)
 
-    def assign_safety(self, safety):
-        self.safety = safety
+    def assign_safety(self, dates):
+        self.safety.extend(dates)
 
     def student_properties(self):
         print("Student Data:")
@@ -25,38 +25,68 @@ class kids:
         print("Days not in dress code:", self.dress)
         print("Improper phone usage:", self.phone)
         print("Days being unsafe:", self.safety)
-    
 
-James = kids('James', 'NA', 'NA', 'NA', 'NA')
-Adam = kids('Adam', 'NA', 'NA', 'NA', 'NA')
-Cole = kids('Cole', 'NA', 'NA', 'NA', 'NA')
-Brian = kids('Brian', 'NA', 'NA', 'NA', 'NA')
-David = kids('David', 'NA', 'NA', 'NA', 'NA')
-John = kids('John', 'NA', 'NA', 'NA', 'NA')
-Chandler = kids('Chandler', 'NA', 'NA', 'NA', 'NA')
-Pearson = kids('Pearson', 'NA', 'NA', 'NA', 'NA')
-Dwayne = kids('Dwayne', 'NA', 'NA', 'NA', 'NA')
-Gavin = kids('Gavin', 'NA', 'NA', 'NA', 'NA')
-Ryan = kids('Ryan', 'NA', 'NA', 'NA', 'NA')
-Shahood = kids('Shahood', 'NA', 'NA', 'NA', 'NA')
-Chris = kids('Chris', 'NA', 'NA', 'NA', 'NA')
-Aiden = kids('Aiden', 'NA', 'NA', 'NA', 'NA')
-Jaiden = kids('Jaiden', 'NA', 'NA', 'NA', 'NA')
-Leo = kids('Leo', 'NA', 'NA', 'NA', 'NA')
-Marcus = kids('Marcus', 'NA', 'NA', 'NA', 'NA')
-Muntag = kids('Muntag', 'NA', 'NA', 'NA', 'NA')
-Mason = kids('Mason', 'NA', 'NA', 'NA', 'NA')
-Nate = kids('Nate', 'NA', 'NA', 'NA', 'NA')
+thekids = {
+    'james': kids('James'),
+    'adam': kids('Adam'),
+    'cole': kids('Cole'),
+    'brian': kids('Brian'),
+    'david': kids('David'),
+    'john': kids('John'), 
+    'chandler': kids('Chandler'),
+    'pearson': kids('Pearson'),
+    'dwayne': kids('Dwayne')
+}
 
-thekids = ["James", "Adam", "Cole", "Brian", "David", "John", "Chandler", "Pearson", "Dwayne", "Gavin", "Ryan", "Shahood", "Chris", "Aiden", "Jaiden", "Leo", "Marcos", "Muntag", "Mason", "Nate"]
-engineering = [James, Adam, Cole, Brian, David, John, Chandler, Pearson, Dwayne, Gavin, Ryan, Shahood, Chris, Aiden, Jaiden, Leo, Marcus, Muntag, Mason, Nate]
+
+
+def displaystudents():
+    name_stats = input("Hello there! Which students data would you like to view today?").lower()
+    kids = thekids.get(name_stats)
+    if kids:
+        kids.student_properties()
+    else:
+        print("Sorry! That student is not in our database")
+    mainmenu()
+
+def studenteditor():
+    edit_name = input("Which student would you like to edit?").lower()
+    kid = thekids.get(edit_name)
+    if kid:
+        print('\n' * 3)
+        kid.student_properties()
+        choice = input("Pick what you would like to edit! \n 1. attendance \n 2. dress code \n 3. phone usage \n 4. safety")
+        if choice == '1':
+            dates = input("Please enter the dates they were absent. ex; 2/10/24, 5/8/24:").split(', ')
+            kid.assign_present(dates)
+        elif choice == '2':
+            dates = input("Please enter the dates they were out of dress code. ex; 2/10/24, 5/8/24:").split(', ')
+            kid.assign_dress(dates)
+        elif choice == '3':
+            dates = input("Please enter the dates they used their phone excessively. ex; 2/10/24, 5/8/24:").split(', ')
+            kid.assign_phone(dates)
+        elif choice == '4':
+            dates = input("Please enter the dates they were being unsafe. ex; 2/10/24, 5/8/24:").split(', ')
+            kid.assign_safety(dates)
+        else:
+            print("Sorry! That is not an option")
+        edit_more = input("Would you like to edit more? \n 1. Yes \n 2. Nope").lower()
+        if edit_more == '1':
+            studenteditor()
+        elif edit_more == '2':
+            mainmenu()
+    else:
+        print("sorry, that student is not in our database!")
+        mainmenu()
 
 def mainmenu():
-    print("Hello there! What would you like to do today? \n 1. View a student \n 2. Edit a students data")
-    if(int(input()) == 1):
-        print("What is the name of the student you would like to view?")
-        kidname = str(input())
-        kidex = thekids.index(kidname)
-        display1 = engineering.pop(kidex)
-        display1.student_properties()
-    if(int(input()) == 2):
+    print("====== MAIN MENU ======")
+    menu_choice = input("Hello there! What would you like to do today? \n 1. Display a student \n 2. Edit a students data")
+    choices = {'1': displaystudents, '2': studenteditor}
+    if menu_choice in choices:
+        choices[menu_choice]()
+    else:
+        print("Sorry that isn't part of the menu!")
+        mainmenu()
+
+mainmenu()
